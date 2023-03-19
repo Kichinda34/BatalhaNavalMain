@@ -1,2 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+
+
+using teste_batalha_naval;
+
+Board board = new Board();
+
+board.PrintBoard();
