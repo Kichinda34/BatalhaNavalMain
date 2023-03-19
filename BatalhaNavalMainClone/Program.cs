@@ -19,7 +19,7 @@ internal class Program
         InsertSubmarine(player2, player1);
         InsertDestroyer(player2, player1);
         InsertCarrier(player2, player1);
-
+        
         int round = 0;
 
         do
@@ -30,16 +30,34 @@ internal class Program
                 VerifyShootPosition(player1);
                 if (player1._submarine._life == 0)
                 {
-                    Console.WriteLine("seu submarino esta destruido");
+                    Console.WriteLine("Seu Submarino foi destruido em combate!");
+                }
+                if (player1._destroyer._life == 0)
+                {
+                    Console.WriteLine("Seu Destroyer foi abatido durante uma Batalha!");
+                }
+                if (player1._aircraftCarrier._life == 0)
+                {
+                    Console.WriteLine("Seu Porta Aviões foi subjulgado pelo Adversário!!");
                 }
             }
             else
             {
                 Console.WriteLine($"Turno de {player2.Name}");
                 VerifyShootPosition(player2);
+                if (player2._submarine._life == 0)
+                {
+                    Console.WriteLine("Seu Submarino foi destruido em combate!");
+                }
+                if (player2._destroyer._life == 0)
+                {
+                    Console.WriteLine("Seu Destroyer foi abatido durante uma Batalha!");
+                }
+                if (player2._aircraftCarrier._life == 0)
+                {
+                    Console.WriteLine("Seu Porta Aviões foi subjulgado pelo Adversário!!");
+                }
             }
-
-
         } while (true);
 
 
