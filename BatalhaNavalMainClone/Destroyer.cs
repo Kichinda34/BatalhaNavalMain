@@ -10,6 +10,7 @@ namespace teste_batalha_naval
     {
         public Destroyer()
         {
+            this._name = "Destroyer";
             this._life = 3;
             this._positions = new int[3, 2];
         }

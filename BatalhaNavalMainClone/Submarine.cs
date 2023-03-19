@@ -11,9 +11,9 @@ namespace teste_batalha_naval
     {
         public Submarine()
         {
+            this._name = "Submarine";
             this._life = 2;
             this._positions = new int[2, 2];
         }
-
     }
 }

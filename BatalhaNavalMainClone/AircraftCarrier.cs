@@ -10,6 +10,7 @@ namespace teste_batalha_naval
     {
         public AircraftCarrier()
         {
+            this._name = "AircraftCarrier";
             this._life = 4;
             this._positions = new int[4, 2];
         }
