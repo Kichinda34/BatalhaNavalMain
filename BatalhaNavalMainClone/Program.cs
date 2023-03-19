@@ -26,6 +26,9 @@ internal class Program
         {
             if (round % 2 == 0)
             {
+
+                Console.WriteLine("Bem vindo!");
+               
                 Console.WriteLine($"Turno de {player1.Name}");
                 VerifyShootPosition(player1);
                 if (player1._submarine._life == 0)
