@@ -13,12 +13,16 @@ internal class Program
         player2.Name = Console.ReadLine();
 
         InsertSubmarine(player1, player2);
+        player2._board.PrintBoard(player1);
         InsertDestroyer(player1, player2);
+        player2._board.PrintBoard(player1);
         InsertCarrier(player1, player2);
         player2._board.PrintBoard(player1);
 
         InsertSubmarine(player2, player1);
+        player1._board.PrintBoard(player2);
         InsertDestroyer(player2, player1);
+        player1._board.PrintBoard(player2);
         InsertCarrier(player2, player1);
         player1._board.PrintBoard(player2);
 
