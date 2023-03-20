@@ -15,20 +15,20 @@ internal class Program
         InsertSubmarine(player1, player2);
         InsertDestroyer(player1, player2);
         InsertCarrier(player1, player2);
+        player2._board.PrintBoard(player1);
 
         InsertSubmarine(player2, player1);
         InsertDestroyer(player2, player1);
         InsertCarrier(player2, player1);
-        
+        player1._board.PrintBoard(player2);
+
         int round = 0;
+        bool aux=true;
 
         do
         {
             if (round % 2 == 0)
             {
-
-                Console.WriteLine("Bem vindo!");
-               
                 Console.WriteLine($"Turno de {player1.Name}");
                 VerifyShootPosition(player1);
                 if (player1._submarine._life == 0)
@@ -43,6 +43,7 @@ internal class Program
                 {
                     Console.WriteLine("Seu Porta Aviões foi subjulgado pelo Adversário!!");
                 }
+                player1._board.PrintBoard();
             }
             else
             {
@@ -60,8 +61,20 @@ internal class Program
                 {
                     Console.WriteLine("Seu Porta Aviões foi subjulgado pelo Adversário!!");
                 }
+                player2._board.PrintBoard();
+
+                if(player1._life==0)
+                {
+                    Console.WriteLine(player2.Name+" Voce ganhou !!!");
+                    aux = false;
+                }
+                if (player2._life == 0)
+                {
+                    Console.WriteLine(player1.Name + " Voce ganhou !!!");
+                    aux = false;
+                }
             }
-        } while (true);
+        } while (aux);
 
 
         void InsertSubmarine(Player p1, Player p2)
@@ -241,7 +254,7 @@ internal class Program
             }
         }
 
-        char VerifyShootPosition(Player player)//(int row, int col)
+        void VerifyShootPosition(Player player)//(int row, int col)
         {
             int[] posVector = VerifyInsertPosition();
             int playerShoot;
@@ -251,22 +264,20 @@ internal class Program
             {
                 Console.WriteLine(">>>SPLASH<<<");
                 round++;
-                return 'O';
             }
             else if (playerShoot == 2)
             {
                 Console.WriteLine(">>>CRASH<<<");
                 player.TakeLife();
-                return 'X';
             }
             else
             {
+                Console.WriteLine("Atirou em posicao repetida!!!");
                 round++;
-                return '-';//VerifyShootPosition(player);
             }
         }
 
-        bool ChangePlayer(char character, Player player)
+        /*bool ChangePlayer(char character, Player player)
         {
             if (character == '-')
             {
@@ -279,6 +290,6 @@ internal class Program
                 return false;
             }
             return true;
-        }
+        }*/
     }
 }

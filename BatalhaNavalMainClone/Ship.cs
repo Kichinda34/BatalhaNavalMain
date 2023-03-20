@@ -11,11 +11,9 @@ namespace teste_batalha_naval
         public int _life { get; set; }
         public int[,] _positions { get; set; }
         public string _name { get; set; }
-
-        private void TakeLife()
+        public void TakeLife()
         {
             this._life--;
-
         }
     }
 }

@@ -37,6 +37,25 @@ namespace teste_batalha_naval
                 Console.WriteLine();
             }
         }
+        public void PrintBoard(Player p)
+        {
+            for (int l = 0; l < _board.GetLength(0); l++)
+            {
+                for (int c = 0; c < _board.GetLength(1); c++)
+                {
+                    if (this._board[l, c] == 0)
+                    {
+                        Console.Write(" ~");
+                    }
+                    else 
+                    {
+                        Console.Write(" " + char.ToUpper(p.Name[0]));
+                    }
+                    
+                }
+                Console.WriteLine();
+            }
+        }
         public int VerifyPosition(int row, int column, Ship ship, string orientation)
         {
             if (orientation == "horizontal")
@@ -478,6 +497,10 @@ namespace teste_batalha_naval
                     }
                 }
             }
+        }
+        public void InsertBoard(int row, int column, int shoot)
+        {
+            this._board[row, column] = shoot;
         }
     }
 }
