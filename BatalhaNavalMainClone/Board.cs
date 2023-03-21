@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,8 +40,10 @@ namespace teste_batalha_naval
         }
         public void PrintBoard(Player p)
         {
+            Console.Write(" A B C D E F G H I J K L M N O P Q R S T\n");
             for (int l = 0; l < _board.GetLength(0); l++)
             {
+                Console.Write(l+1);
                 for (int c = 0; c < _board.GetLength(1); c++)
                 {
                     if (this._board[l, c] == 0)
@@ -448,7 +451,7 @@ namespace teste_batalha_naval
                         }
                     }
 
-                    return 1;
+                    return 2;
                 }
 
                 return 0;
@@ -466,7 +469,7 @@ namespace teste_batalha_naval
                 {
 
                     // Percorre a linha
-                    for (int linha = row; linha > row - (ship._life - 1); linha--)
+                    for (int linha = row; linha > row - ship._life; linha--)
                     {
                         if (this._board[linha, column] != 0)
                         {
@@ -502,41 +505,119 @@ namespace teste_batalha_naval
                         return 0;
                     }
                     if (column == 0)
-                    {   
-                        
-                        if (this._board[row - ship._life, column] != 0 || this._board[row - ship._life, column + 1] != 0)
+                    {
+                        if (row == 19)
                         {
-                            return 0;
+                            if (this._board[row - ship._life, column] != 0 || this._board[row - ship._life, column + 1] != 0)
+                            {
+                                return 0;
+                            }
+                            return 1;
                         }
-                        else if (this._board[row - 1, column] != 0 || this._board[row - 1, column + 1] != 0)
+                        else if ((row - ship._life) > -1)
                         {
-                            return 0;
+                            
+                            if (this._board[row - ship._life, column] != 0 || this._board[row - ship._life, column + 1] != 0)
+                            {
+                                Console.WriteLine("teste");
+                                return 0;
+                                Console.WriteLine("test11111111e");
+                            }
+                            else if (this._board[row + 1, column] != 0 || this._board[row + 1, column + 1] != 0)
+                            {
+                                return 0;
+                            }
+                            return 1;
+
                         }
+                        else if((row - ship._life) == -1)
+                        {
+                            if (this._board[row + 1, column] != 0 || this._board[row + 1, column + 1] != 0)
+                            {
+                                return 0;
+                            }
+                            return 1;
+                        }
+                        return 0;
                     }
                     else if (column == 19)
                     {
+                        if (row == 19)
+                        {
+                            if (this._board[row - ship._life, column] != 0 || this._board[row - ship._life, column - 1] != 0)
+                            {
+                                return 0;
+                            }
+                        }
+                        else if ((row - ship._life) > -1)
+                        {
+                            if (this._board[row - ship._life, column] != 0 || this._board[row - ship._life, column - 1] != 0)
+                            {
+                                return 0;
+                            }
+                            else if (this._board[row + 1, column] != 0 || this._board[row + 1, column - 1] != 0)
+                            {
+                                return 0;
+                            }
+                            return 1;
+
+                        }
+                        else if ((row - ship._life) == -1)
+                        {
+                            if (this._board[row + 1, column] != 0 || this._board[row + 1, column - 1] != 0)
+                            {
+                                return 0;
+                            }
+                            return 1;
+                        }
+                        return 0;
+
+
+
+
                         if (this._board[row - ship._life, column] != 0 || this._board[row - ship._life, column - 1] != 0)
                         {
                             return 0;
                         }
-                        else if (this._board[row - 1, column] != 0 || this._board[row - 1, column - 1] != 0)
+                        else if (this._board[row + 1, column] != 0 || this._board[row + 1, column - 1] != 0)
                         {
                             return 0;
                         }
                     }
                     else
                     {
-                        if (this._board[row - ship._life, column] != 0 || this._board[row - ship._life, column + 1] != 0 || this._board[row - ship._life, column - 1] != 0)
+                        if ((row - ship._life) == -1)
                         {
-                            return 0;
+                            if (this._board[row + 1, column] != 0 || this._board[row + 1, column + 1] != 0 || this._board[row + 1, column - 1] != 0)
+                            {
+                                return 0;
+                            }
+                            return 1;
                         }
-                        else if (this._board[row - 1, column] != 0 || this._board[row - 1, column + 1] != 0 || this._board[row - 1, column - 1] != 0)
+                        else if (row == 19)
                         {
-                            return 0;
+                            if (this._board[row - ship._life, column] != 0 || this._board[row - ship._life, column + 1] != 0 || this._board[row - ship._life, column - 1] != 0)
+                            {
+                                return 0;
+                            }
+                            return 1;
                         }
-                    }
+                        else if ((row - ship._life) == -1)
+                        {
+                            if (this._board[row - ship._life, column] != 0 || this._board[row - ship._life, column + 1] != 0 || this._board[row - ship._life, column - 1] != 0)
+                            {
+                                return 0;
+                            }
+                            else if (this._board[row + 1, column] != 0 || this._board[row + 1, column + 1] != 0 || this._board[row + 1, column - 1] != 0)
+                            {
+                                return 0;
+                            }
+                            return 1;
+                        }
+                        return 0;
 
-                    return 2;
+                            
+                    }
                 }
             }
 
@@ -582,10 +663,10 @@ namespace teste_batalha_naval
             {
                 if (direction == 1)
                 {
-                    for (int i = 0; i < ship._life; i++)
+                    for (int i = (ship._life-1); i >=0; i--)
                     {
                         this._board[row, column] = 3;
-                        row++;
+                        row--;
                     }
                 }
                 else
@@ -593,7 +674,7 @@ namespace teste_batalha_naval
                     for (int i = 0; i < ship._life; i++)
                     {
                         this._board[row, column] = 3;
-                        row--;
+                        row++;
                     }
                 }
             }
