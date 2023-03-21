@@ -91,7 +91,7 @@ namespace teste_batalha_naval
             if (orientation == "horizontal")//desnecesario
             {
                 // Verifica se cabe na horizontal para a direita;
-                if (column + ship._life - 1 <= this._board.GetLength(1) - 1)
+                if (column + (ship._life - 1) <= this._board.GetLength(1) - 1)
                 {
                     
                     // Percorre as colunas;
@@ -205,7 +205,7 @@ namespace teste_batalha_naval
                             {
                                 return 0;
                             }
-                            else if (this._board[row, column - 1] != 0 || this._board[row + 1, column - 1] != 0 || this._board[row - 1, column + ship._life] != 0)
+                            else if (this._board[row, column - 1] != 0 || this._board[row + 1, column - 1] != 0 || this._board[row - 1, column - 1] != 0)
                             {
                                 return 0;
                             }
@@ -234,26 +234,30 @@ namespace teste_batalha_naval
                         return 0;
                     }
                     // Percorre coluna
-                    for (int coluna = column; coluna > column - (ship._life - 1); coluna--)
+                    for (int coluna = column; coluna >= column - (ship._life - 1); coluna--)
                     {
+                        if (this._board[row, coluna] != 0)
+                        {
+                            return 0;
+                        }
                         // Verifica em cima e em baixo
                         if (row == 0)
                         {
-                            if (this._board[row + 1, coluna] != 0 || this._board[row, coluna - 1] != 0)
+                            if (this._board[row + 1, coluna] != 0)
                             {
                                 return 0;
                             }
                         }
                         else if (row == 19)
                         {
-                            if (this._board[row - 1, coluna] != 0 || this._board[row, coluna - 1] != 0)
+                            if (this._board[row - 1, coluna] != 0)
                             {
                                 return 0;
                             }
                         }
                         else
                         {
-                            if (this._board[row - 1, coluna] != 0 || this._board[row + 1, coluna] != 0 || this._board[row, coluna - 1] != 0)
+                            if (this._board[row - 1, coluna] != 0 || this._board[row + 1, coluna] != 0)
                             {
                                 return 0;
                             }
@@ -263,46 +267,55 @@ namespace teste_batalha_naval
                     // Verifica diagonal frente e tras
                     if (row == 0 && column == 0)
                     {
-                        if (this._board[row, column + ship._life] != 0 || this._board[row + 1, column + ship._life] != 0)
-                        {
-                            return 0;
-                        }
+                        return 0;
                     }
                     else if (row == 0)
                     {
-                        if (this._board[row, column - ship._life] != 0 || this._board[row + 1, column - ship._life] != 0)
+                        if ((column - ship._life) > -1)
                         {
-                            return 0;
+                            if (this._board[row, column - ship._life] != 0 || this._board[row + 1, column - ship._life] != 0)
+                            {
+                                return 0;
+                            }
+                            return 2;
                         }
-                        else if (this._board[row, column - 1] != 0 || this._board[row + 1, column - 1] != 0)
+                        else if ((column - ship._life) == -1)
                         {
-                            return 0;
+                            return 2;
                         }
+                        return 0;
                     }
                     else if (row == 19)
                     {
-                        if (this._board[row, column - ship._life] != 0 || this._board[row - 1, column - ship._life] != 0)
+                        if ((column - ship._life) > -1)
                         {
-                            return 0;
+                            if (this._board[row, column - ship._life] != 0 || this._board[row - 1, column - ship._life] != 0)
+                            {
+                                return 0;
+                            }
+                            return 2;
                         }
-                        else if (this._board[row, column - 1] != 0 || this._board[row - 1, column - 1] != 0)
+                        else if((column - ship._life) == -1)
                         {
-                            return 0;
+                            return 2;
                         }
+                        return 0;
                     }
                     else
                     {
-                        if (this._board[row, column - ship._life] != 0 || this._board[row + 1, column - ship._life] != 0 || this._board[row - 1, column - ship._life] != 0)
+                        if ((column - ship._life) > -1)
                         {
-                            return 0;
+                            if (this._board[row, column - ship._life] != 0 || this._board[row + 1, column - ship._life] != 0 || this._board[row - 1, column - ship._life] != 0)
+                            {
+                                return 0;
+                            }
                         }
-                        else if (this._board[row, column - 1] != 0 || this._board[row + 1, column - 1] != 0 || this._board[row - 1, column - ship._life] != 0)
+                        else if ((column - ship._life) == -1)
                         {
-                            return 0;
+                            return 2;
                         }
+                        return 0;
                     }
-
-                    return 2;
                 }
             }
 

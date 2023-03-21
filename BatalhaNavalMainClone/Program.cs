@@ -227,6 +227,13 @@ internal class Program
                             return VerifyInsertPosition();
                         }
                         auxVector[1] = alphabet.IndexOf(charPosition);
+                        if (auxVector[1] == -1)
+                        {
+                            Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
+                            Console.ReadKey();
+                            Console.Clear();
+                            return VerifyInsertPosition();
+                        }
                         return auxVector;
                     }
                 }
