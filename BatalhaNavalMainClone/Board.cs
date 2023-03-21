@@ -18,8 +18,10 @@ namespace teste_batalha_naval
 
         public void PrintBoard()
         {
+            Console.Write("  A B C D E F G H I J K L M N O P Q R S T\n");
             for (int l = 0; l < _board.GetLength(0); l++)
             {
+                Console.Write(l + 1);
                 for (int c = 0; c < _board.GetLength(1); c++)
                 {
                     if (this._board[l, c] == 0 || this._board[l, c] == 3)

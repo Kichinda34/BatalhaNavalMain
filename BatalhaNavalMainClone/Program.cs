@@ -7,25 +7,41 @@ internal class Program
         Player player1 = new Player();
         Player player2 = new Player();
 
+        Console.WriteLine("Este é um sistema feito para o jogo de batalha naval, BEM VINDOS!!!");
+        Console.WriteLine("Esse jogo é jogado em 2 pessoas, então por favor informem seus nomes.\n");
+
         Console.WriteLine("Nome do jogador 1: ");
         player1.Name = Console.ReadLine();
         Console.WriteLine("Nome do jogador 2: ");
         player2.Name = Console.ReadLine();
 
+        Console.Clear();
+
+        player2._board.PrintBoard(player1);
         InsertSubmarine(player1, player2);
+        Console.Clear();
         player2._board.PrintBoard(player1);
         InsertDestroyer(player1, player2);
+        Console.Clear();
         player2._board.PrintBoard(player1);
         InsertCarrier(player1, player2);
+        Console.Clear();
         player2._board.PrintBoard(player1);
+        Console.WriteLine("Para o proximo jogador inserir seus navios, Aperte Enter!");
         Console.ReadKey();
         Console.Clear();
+
+        player1._board.PrintBoard(player2);
         InsertSubmarine(player2, player1);
+        Console.Clear();
         player1._board.PrintBoard(player2);
         InsertDestroyer(player2, player1);
+        Console.Clear();
         player1._board.PrintBoard(player2);
         InsertCarrier(player2, player1);
+        Console.Clear();
         player1._board.PrintBoard(player2);
+        Console.WriteLine("Para irem para o jogo Aperte Enter!!!");
         Console.ReadKey();
         Console.Clear();
 
@@ -34,20 +50,25 @@ internal class Program
 
         do
         {
+            Console.Clear() ;
             if (round % 2 == 0)
             {
+                player1._board.PrintBoard();
                 Console.WriteLine($"Turno de {player1.Name}");
                 VerifyShootPosition(player1, player2);
                 
                 player1._board.PrintBoard();
+                Console.WriteLine("Aperte Enter para continuar!!");
                 Console.ReadKey();
             }
             else
             {
+                player2._board.PrintBoard();
                 Console.WriteLine($"Turno de {player2.Name}");
                 VerifyShootPosition(player2, player1);
                 
                 player2._board.PrintBoard();
+                Console.WriteLine("Aperte Enter para continuar!!");
                 Console.ReadKey();
             }
             if (player1._life == 0)
@@ -75,7 +96,7 @@ internal class Program
 
                 do
                 {
-                    Console.WriteLine("Escolha a orientacao:\n[1]- Horizontal\n[2]- Vertical\n: ");
+                    Console.Write("\nEscolha a orientacao:\n[1]- Horizontal\n[2]- Vertical\n: ");
                     if (int.TryParse(Console.ReadLine(), out orientation))
                     {
                         if (orientation == 1 || orientation == 2)
@@ -108,7 +129,7 @@ internal class Program
 
                 do
                 {
-                    Console.WriteLine("Escolha a orientacao:\n[1]- Horizontal\n[2]- Vertical\n: ");
+                    Console.Write("\nEscolha a orientacao:\n[1]- Horizontal\n[2]- Vertical\n: ");
                     if (int.TryParse(Console.ReadLine(), out orientation))
                     {
                         if (orientation == 1 || orientation == 2)
@@ -141,7 +162,7 @@ internal class Program
 
                 do
                 {
-                    Console.WriteLine("Escolha a orientacao:\n[1]- Horizontal\n[2]- Vertical\n: ");
+                    Console.Write("\nEscolha a orientacao:\n[1]- Horizontal\n[2]- Vertical\n: ");
                     if (int.TryParse(Console.ReadLine(), out orientation))
                     {
                         if (orientation == 1 || orientation == 2)
@@ -169,7 +190,7 @@ internal class Program
             string[] auxString;
             int[] auxVector = new int[2];
 
-            Console.WriteLine("Indique a posição alvo: (A,1)");
+            Console.WriteLine("Indique a posição alvo separada por virgulas: A,1");
             auxString = Console.ReadLine().Split(',');//separa em um vetor a partir das virgulas
 
             if (auxString.GetUpperBound(0) == 1)
