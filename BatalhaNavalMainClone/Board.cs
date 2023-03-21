@@ -93,7 +93,7 @@ namespace teste_batalha_naval
                 // Verifica se cabe na horizontal para a direita;
                 if (column + (ship._life - 1) <= this._board.GetLength(1) - 1)
                 {
-                    
+
                     // Percorre as colunas;
                     for (int coluna = column; coluna <= column + (ship._life - 1); coluna++)
                     {
@@ -228,7 +228,7 @@ namespace teste_batalha_naval
             {
                 if (column - (ship._life - 1) >= 0)
                 {
-                    
+
                     // Percorre coluna
                     for (int coluna = column; coluna >= column - (ship._life - 1); coluna--)
                     {
@@ -284,7 +284,7 @@ namespace teste_batalha_naval
                             else
                             {
 
-                                if (this._board[row, column - ship._life] != 0 || this._board[row - 1, column - ship._life] != 0)
+                                if (this._board[row, column - ship._life] != 0 || this._board[row + 1, column - ship._life] != 0)
                                 {
                                     return 0;
                                 }
@@ -322,7 +322,7 @@ namespace teste_batalha_naval
                                 return 2;
                             }
                         }
-                        else if((column - ship._life) == -1)
+                        else if ((column - ship._life) == -1)
                         {
                             return 2;
                         }
@@ -464,7 +464,7 @@ namespace teste_batalha_naval
                 // Verifica se cabe na vertical de baixo para cima
                 if (row - (ship._life - 1) >= 0)
                 {
-                    
+
                     // Percorre a linha
                     for (int linha = row; linha > row - (ship._life - 1); linha--)
                     {
@@ -475,21 +475,21 @@ namespace teste_batalha_naval
                         // verifica de uma lado e de outro
                         if (column == 0)
                         {
-                            if (this._board[linha, column + 1] != 0 || this._board[linha - 1, column] != 0)
+                            if (this._board[linha, column + 1] != 0)
                             {
                                 return 0;
                             }
                         }
                         else if (column == 19)
                         {
-                            if (this._board[linha, column - 1] != 0 || this._board[linha - 1, column] != 0)
+                            if (this._board[linha, column - 1] != 0)
                             {
                                 return 0;
                             }
                         }
                         else
                         {
-                            if (this._board[linha, column + 1] != 0 || this._board[linha - 1, column] != 0 || this._board[linha, column - 1] != 0)
+                            if (this._board[linha, column + 1] != 0 || this._board[linha, column - 1] != 0)
                             {
                                 return 0;
                             }
@@ -499,13 +499,11 @@ namespace teste_batalha_naval
                     // Verifica diagonal frente e tras
                     if (row == 0 && column == 0)
                     {
-                        if (this._board[row + ship._life, column] != 0 || this._board[row + ship._life, column + 1] != 0)
-                        {
-                            return 0;
-                        }
+                        return 0;
                     }
                     if (column == 0)
-                    {
+                    {   
+                        
                         if (this._board[row - ship._life, column] != 0 || this._board[row - ship._life, column + 1] != 0)
                         {
                             return 0;
