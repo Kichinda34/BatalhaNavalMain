@@ -228,11 +228,7 @@ namespace teste_batalha_naval
             {
                 if (column - (ship._life - 1) >= 0)
                 {
-                    // Verifica a posição inicial;
-                    if (this._board[row, column] != 0)
-                    {
-                        return 0;
-                    }
+                    
                     // Percorre coluna
                     for (int coluna = column; coluna >= column - (ship._life - 1); coluna--)
                     {
@@ -273,11 +269,27 @@ namespace teste_batalha_naval
                     {
                         if ((column - ship._life) > -1)
                         {
-                            if (this._board[row, column - ship._life] != 0 || this._board[row + 1, column - ship._life] != 0)
+                            if (column != 19)
                             {
-                                return 0;
+                                if (this._board[row, column - ship._life] != 0 || this._board[row + 1, column - ship._life] != 0)
+                                {
+                                    return 0;
+                                }
+                                else if (this._board[row, column + 1] != 0 || this._board[row + 1, column + 1] != 0 || this._board[row - 1, column + 1] != 0)
+                                {
+                                    return 0;
+                                }
+                                return 2;
                             }
-                            return 2;
+                            else
+                            {
+
+                                if (this._board[row, column - ship._life] != 0 || this._board[row - 1, column - ship._life] != 0)
+                                {
+                                    return 0;
+                                }
+                                return 2;
+                            }
                         }
                         else if ((column - ship._life) == -1)
                         {
@@ -289,11 +301,26 @@ namespace teste_batalha_naval
                     {
                         if ((column - ship._life) > -1)
                         {
-                            if (this._board[row, column - ship._life] != 0 || this._board[row - 1, column - ship._life] != 0)
+                            if (column != 19)
                             {
-                                return 0;
+                                if (this._board[row, column - ship._life] != 0 || this._board[row - 1, column - ship._life] != 0)
+                                {
+                                    return 0;
+                                }
+                                else if (this._board[row, column + 1] != 0 || this._board[row + 1, column + 1] != 0 || this._board[row - 1, column + 1] != 0)
+                                {
+                                    return 0;
+                                }
+                                return 2;
                             }
-                            return 2;
+                            else
+                            {
+                                if (this._board[row, column - ship._life] != 0 || this._board[row - 1, column - ship._life] != 0)
+                                {
+                                    return 0;
+                                }
+                                return 2;
+                            }
                         }
                         else if((column - ship._life) == -1)
                         {
@@ -305,9 +332,25 @@ namespace teste_batalha_naval
                     {
                         if ((column - ship._life) > -1)
                         {
-                            if (this._board[row, column - ship._life] != 0 || this._board[row + 1, column - ship._life] != 0 || this._board[row - 1, column - ship._life] != 0)
+                            if (column != 19)
                             {
-                                return 0;
+                                if (this._board[row, column - ship._life] != 0 || this._board[row + 1, column - ship._life] != 0 || this._board[row - 1, column - ship._life] != 0)
+                                {
+                                    return 0;
+                                }
+                                else if (this._board[row, column + 1] != 0 || this._board[row + 1, column + 1] != 0 || this._board[row - 1, column + 1] != 0)
+                                {
+                                    return 0;
+                                }
+                                return 2;
+                            }
+                            else
+                            {
+                                if (this._board[row, column - ship._life] != 0 || this._board[row - 1, column - ship._life] != 0)
+                                {
+                                    return 0;
+                                }
+                                return 2;
                             }
                         }
                         else if ((column - ship._life) == -1)
@@ -328,7 +371,7 @@ namespace teste_batalha_naval
             if (orientation == "vertical")
             {
                 // Verifica se cabe na vertical para baixo
-                if (row + ship._life - 1 <= this._board.GetLength(0) - 1)
+                if (row + (ship._life - 1) <= this._board.GetLength(0) - 1)
                 {
 
                     // Verifica a posição inicial;
@@ -421,14 +464,14 @@ namespace teste_batalha_naval
                 // Verifica se cabe na vertical de baixo para cima
                 if (row - (ship._life - 1) >= 0)
                 {
-                    //Verifica posição inicial;
-                    if (this._board[row, column] != 0)
-                    {
-                        return 0;
-                    }
+                    
                     // Percorre a linha
                     for (int linha = row; linha > row - (ship._life - 1); linha--)
                     {
+                        if (this._board[linha, column] != 0)
+                        {
+                            return 0;
+                        }
                         // verifica de uma lado e de outro
                         if (column == 0)
                         {
