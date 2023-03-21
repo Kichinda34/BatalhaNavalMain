@@ -30,15 +30,19 @@ namespace teste_batalha_naval
             this._life--;
         }
 
-        public int shoot(int row, int col)
+        public int shoot(int row, int col, Player p)
         {
             int aux =  this._board.Verifyshoot(row, col);
 
-            if (aux != 0)
+            if (aux == 2)
             {
                 this._board.InsertBoard(row, col, aux);
-                DestroyShip(row, col);
-                TakeLife();
+                p.DestroyShip(row, col);
+                p.TakeLife();
+            }
+            else if (aux != 0)
+            {
+                this._board.InsertBoard(row, col, aux);
             }
             return aux;
         }

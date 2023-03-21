@@ -18,13 +18,16 @@ internal class Program
         player2._board.PrintBoard(player1);
         InsertCarrier(player1, player2);
         player2._board.PrintBoard(player1);
-
+        Console.ReadKey();
+        Console.Clear();
         InsertSubmarine(player2, player1);
         player1._board.PrintBoard(player2);
         InsertDestroyer(player2, player1);
         player1._board.PrintBoard(player2);
         InsertCarrier(player2, player1);
         player1._board.PrintBoard(player2);
+        Console.ReadKey();
+        Console.Clear();
 
         int round = 0;
         bool aux=true;
@@ -34,49 +37,28 @@ internal class Program
             if (round % 2 == 0)
             {
                 Console.WriteLine($"Turno de {player1.Name}");
-                VerifyShootPosition(player1);
-                if (player1._submarine._life == 0)
-                {
-                    Console.WriteLine("Seu Submarino foi destruido em combate!");
-                }
-                if (player1._destroyer._life == 0)
-                {
-                    Console.WriteLine("Seu Destroyer foi abatido durante uma Batalha!");
-                }
-                if (player1._aircraftCarrier._life == 0)
-                {
-                    Console.WriteLine("Seu Porta Aviões foi subjulgado pelo Adversário!!");
-                }
+                VerifyShootPosition(player1, player2);
+                
                 player1._board.PrintBoard();
+                Console.ReadKey();
             }
             else
             {
                 Console.WriteLine($"Turno de {player2.Name}");
-                VerifyShootPosition(player2);
-                if (player2._submarine._life == 0)
-                {
-                    Console.WriteLine("Seu Submarino foi destruido em combate!");
-                }
-                if (player2._destroyer._life == 0)
-                {
-                    Console.WriteLine("Seu Destroyer foi abatido durante uma Batalha!");
-                }
-                if (player2._aircraftCarrier._life == 0)
-                {
-                    Console.WriteLine("Seu Porta Aviões foi subjulgado pelo Adversário!!");
-                }
+                VerifyShootPosition(player2, player1);
+                
                 player2._board.PrintBoard();
-
-                if(player1._life==0)
-                {
-                    Console.WriteLine(player2.Name+" Voce ganhou !!!");
-                    aux = false;
-                }
-                if (player2._life == 0)
-                {
-                    Console.WriteLine(player1.Name + " Voce ganhou !!!");
-                    aux = false;
-                }
+                Console.ReadKey();
+            }
+            if (player1._life == 0)
+            {
+                Console.WriteLine(player2.Name + " Voce ganhou !!!");
+                aux = false;
+            }
+            if (player2._life == 0)
+            {
+                Console.WriteLine(player1.Name + " Voce ganhou !!!");
+                aux = false;
             }
         } while (aux);
 
@@ -198,7 +180,6 @@ internal class Program
                     if ((!int.TryParse(auxString[1], out auxVector[0])))
                     {
                         //verifica se digtou 2 strings
-                        Console.WriteLine("digitou 2 strings");
                         Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
                         Console.ReadKey();
                         Console.Clear();
@@ -210,15 +191,14 @@ internal class Program
                         if (!char.TryParse(auxString[0].Trim().ToUpper(), out charPosition))
                         {
                             //tenta converter para char, ja que char permite so uma letra
-                            Console.WriteLine("ditado duas letras entre virgulas");
                             Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
                             Console.ReadKey();
                             Console.Clear();
                             return VerifyInsertPosition();
                         }
-                        Console.WriteLine("cheguei aki");
+                       
                         auxVector[0] -= 1;
-                        Console.WriteLine(auxVector[0]);
+
                         if (auxVector[0] > 19 || auxVector[0] < 0)
                         {
                             Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
@@ -274,11 +254,11 @@ internal class Program
             }
         }
 
-        void VerifyShootPosition(Player player)//(int row, int col)
+        void VerifyShootPosition(Player player, Player p2)//(int row, int col)
         {
             int[] posVector = VerifyInsertPosition();
             int playerShoot;
-            playerShoot = player.shoot(posVector[0], posVector[1]);
+            playerShoot = player.shoot(posVector[0], posVector[1], p2);
 
             if (playerShoot == 1)
             {
@@ -288,7 +268,6 @@ internal class Program
             else if (playerShoot == 2)
             {
                 Console.WriteLine(">>>CRASH<<<");
-                player.TakeLife();
             }
             else
             {
@@ -297,19 +276,5 @@ internal class Program
             }
         }
 
-        /*bool ChangePlayer(char character, Player player)
-        {
-            if (character == '-')
-            {
-                Console.WriteLine("Perdeu a vez!");
-                return true;
-            }
-            else if (character == 'X')
-            {
-                VerifyShootPosition(player);
-                return false;
-            }
-            return true;
-        }*/
     }
 }
