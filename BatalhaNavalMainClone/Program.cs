@@ -188,37 +188,59 @@ internal class Program
             int[] auxVector = new int[2];
 
             Console.WriteLine("Indique a posição alvo: (A,1)");
-            auxString = Console.ReadLine().Split(',');
+            auxString = Console.ReadLine().Split(',');//separa em um vetor a partir das virgulas
 
-            if (auxString.GetUpperBound(0) == 0)
+            if (auxString.GetUpperBound(0) == 1)
             {
-                Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
-                Console.ReadKey();
-                Console.Clear();
-                return VerifyInsertPosition();
-            }
-
-            if ((!int.TryParse(auxString[0], out (auxVector[0]))))
-            {
-                if ((!int.TryParse(auxString[1], out auxVector[0])))
+                if ((!int.TryParse(auxString[0], out (auxVector[0]))))
                 {
-                    Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
-                    Console.ReadKey();
-                    Console.Clear();
-                    return VerifyInsertPosition();
+                    //falhou ao converter o primeiro valor em inteiro, ou seja é uma string
+                    if ((!int.TryParse(auxString[1], out auxVector[0])))
+                    {
+                        //verifica se digtou 2 strings
+                        Console.WriteLine("digitou 2 strings");
+                        Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
+                        Console.ReadKey();
+                        Console.Clear();
+                        return VerifyInsertPosition();
+                    }
+                    else
+                    {
+                        //caso nao tenha digitado 2 strings
+                        if (!char.TryParse(auxString[0].Trim().ToUpper(), out charPosition))
+                        {
+                            //tenta converter para char, ja que char permite so uma letra
+                            Console.WriteLine("ditado duas letras entre virgulas");
+                            Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
+                            Console.ReadKey();
+                            Console.Clear();
+                            return VerifyInsertPosition();
+                        }
+                        Console.WriteLine("cheguei aki");
+                        auxVector[0] -= 1;
+                        Console.WriteLine(auxVector[0]);
+                        if (auxVector[0] > 19 || auxVector[0] < 0)
+                        {
+                            Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
+                            Console.ReadKey();
+                            Console.Clear();
+                            return VerifyInsertPosition();
+                        }
+                        auxVector[1] = alphabet.IndexOf(charPosition);
+                        return auxVector;
+                    }
                 }
                 else
                 {
-                    if (!char.TryParse(auxString[0].Trim().ToUpper(), out charPosition))
+                    if (!char.TryParse(auxString[1].Trim().ToUpper(), out charPosition))
                     {
                         Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
                         Console.ReadKey();
                         Console.Clear();
                         return VerifyInsertPosition();
                     }
-
                     auxVector[0] -= 1;
-                    if (auxVector[0] > 19)
+                    if (auxVector[0] > 19 || auxVector[0] < 0)
                     {
                         Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
                         Console.ReadKey();
@@ -226,35 +248,22 @@ internal class Program
                         return VerifyInsertPosition();
                     }
                     auxVector[1] = alphabet.IndexOf(charPosition);
+                    if (auxVector[1] == -1)
+                    {
+                        Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
+                        Console.ReadKey();
+                        Console.Clear();
+                        return VerifyInsertPosition();
+                    }
                     return auxVector;
                 }
             }
             else
             {
-                if (!char.TryParse(auxString[1].Trim().ToUpper(), out charPosition))
-                {
-                    Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
-                    Console.ReadKey();
-                    Console.Clear();
-                    return VerifyInsertPosition();
-                }
-                auxVector[0] -= 1;
-                if (auxVector[0] > 19)
-                {
-                    Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
-                    Console.ReadKey();
-                    Console.Clear();
-                    return VerifyInsertPosition();
-                }
-                auxVector[1] = alphabet.IndexOf(charPosition);
-                if (auxVector[1] == -1)
-                {
-                    Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
-                    Console.ReadKey();
-                    Console.Clear();
-                    return VerifyInsertPosition();
-                }
-                return auxVector;
+                Console.WriteLine("Valor inválido! Aperte qualquer tecla para continuar.");
+                Console.ReadKey();
+                Console.Clear();
+                return VerifyInsertPosition();
             }
         }
 
